@@ -1,0 +1,32 @@
+# Virtual environments
+venv/
+.venv/
+
+# Environment variables (never commit secrets!)
+.env
+**/.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Vector store & database
+chroma_db/
+chat_history.db
+
+# Uploads directory
+uploads/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDE / OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
