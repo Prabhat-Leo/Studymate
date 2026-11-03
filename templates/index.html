@@ -1,55 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>StudyMate</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body>
-    <div class="chat-container">
-        <div class="chat-header">
-    <span>StudyMate</span>
-        <button id="clear-btn" title="Clear chat history">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3 6 5 6 21 6"></polyline>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-       </svg>
-       </button>
-       </div>
-        <div id="chat-box">
-            {% for msg in messages %}
-            <div class="message user">{{ msg.user_message }}</div>
-            <div class="message bot">{{ msg.bot_reply }}</div>
-            {% endfor %}
-        </div>
-
-        <div class="upload-area">
-        <label for="pdf-upload" class="upload-dropzone" id="upload-dropzone">
-        <div class="upload-icon-wrap">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="17 8 12 3 7 8"></polyline>
-                <line x1="12" y1="3" x2="12" y2="15"></line>
-            </svg>
-        </div>
-        <div class="upload-text">
-            <span class="upload-title" id="file-name-display">Choose a PDF to upload</span>
-            <span class="upload-subtitle">or drag and drop here</span>
-        </div>
-    </label>
-    <input type="file" id="pdf-upload" accept="application/pdf" hidden>
-    <button id="upload-btn" class="upload-submit-btn">
-        Upload
-    </button>
-    </div>
-    <div id="upload-status" class="upload-status-text"></div>
-        <div class="input-area">
-            <input type="text" id="user-input" placeholder="Type a message...">
-            <button id="send-btn">Send</button>
-        </div>
-    </div>
-
-    <script src="/static/script.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StudyMate — AI Study OS</title><link rel="stylesheet" href="/assets/style.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></head><body>
+<div class="ambient a1"></div><div class="ambient a2"></div><header><a class="brand" href="/"><i>✦</i> StudyMate <small>AI</small></a><nav><a href="#features">Features</a><a href="#how">How it works</a><a href="#about">About</a></nav><div class="nav-actions"><a href="/login">Log in</a><a class="small-btn" href="/login">Get started →</a></div><button class="menu">☰</button></header>
+<main><section class="hero"><label>✦ AI-POWERED LEARNING WORKSPACE</label><h1>Study smarter.<br><span>Understand faster.</span></h1><p>Turn your PDFs and notes into an intelligent study companion. Ask questions, simplify concepts, generate quizzes, and revise with AI.</p><div class="actions"><a class="primary" href="/login">Start studying free ↗</a><a class="secondary" href="/chat">Take a PDF quiz ↗</a><a class="secondary" href="/chat">Create flashcards ↗</a><a class="secondary" href="#features">See what StudyMate does</a></div><div class="trust">⚡ Instant answers　 ◈ PDF-aware AI　 ✓ Built for students</div></section>
+<section class="showcase"><div class="mock"><div class="mock-head"><b>✦ StudyMate AI <em>Live</em></b><span>•••</span></div><div class="mock-body"><aside><b>My Study</b><span>📄 Physics Notes</span><span>🧠 Flashcards</span><span>◈ Quiz</span><span>⌁ Study Radar</span></aside><article><small>ASK YOUR NOTES</small><h3>What is Newton's second law?</h3><div class="answer"><b>In simple words</b><p>It tells us how force, mass, and acceleration are connected: more force creates more acceleration, while more mass needs more force for the same acceleration.</p></div><div class="mock-input">Ask anything about your notes... <button>↗</button></div></article></div></div></section>
+<section id="features" class="section"><div class="intro"><small>CORE FEATURES</small><h2>Everything you need to<br><span>study with clarity.</span></h2><p>One focused workspace for understanding, practicing, and remembering what you learn.</p></div><div class="cards">
+<div class="card"><i>✦</i><small>UNDERSTAND</small><h3>Chat with your notes</h3><p>Ask questions about uploaded PDFs and get contextual, study-friendly answers.</p></div>
+<div class="card"><i>◈</i><small>PRACTICE</small><h3>AI Quiz Generator</h3><p>Turn chapters into quizzes so you can test your understanding instead of just rereading.</p></div>
+<div class="card"><i>☆</i><small>REMEMBER</small><h3>Smart Flashcards</h3><p>Create revision cards from definitions, formulas, concepts, and important points.</p></div>
+<div class="card"><i>⌁</i><small>PRIORITIZE</small><h3>Study Radar</h3><p>Find important topics, difficult concepts, likely questions, and estimated study time.</p></div></div></section>
+<section id="how" class="split"><div><small>HOW IT WORKS</small><h2>From PDF to<br><span>study session.</span></h2><p>Bring your material, ask the AI, then practice what you learned — all in one workspace.</p></div><div class="steps"><div><b>01</b><section><h3>Upload</h3><p>Add your textbook, lecture notes, assignment, or study PDF.</p></section></div><div><b>02</b><section><h3>Ask</h3><p>Chat naturally with your material and ask for explanations or summaries.</p></section></div><div><b>03</b><section><h3>Master</h3><p>Generate quizzes and flashcards to turn understanding into retention.</p></section></div></div></section>
+<section id="about" class="cta"><small>READY WHEN YOU ARE</small><h2>Your next study session<br><span>starts here.</span></h2><a class="primary" href="/login">Enter StudyMate →</a></section></main><footer><b>✦ StudyMate</b><span>AI-powered learning, designed for students.</span></footer></body></html>

@@ -5,8 +5,9 @@ An AI-powered PDF Q&A assistant. Upload a PDF, ask questions, and get answers gr
 ## Features
 
 - Upload a PDF and ask questions about its content
+- Generate active-PDF flashcards with answer reveal and deck navigation
 - Answers are grounded only in the document — no hallucinated info outside its context
-- Fast inference via the Groq API (OpenAI-compatible)
+- Fast inference via Groq, with Gemini as a fallback (both OpenAI-compatible)
 - Semantic search over document chunks using vector embeddings
 - Persistent chat history (SQLite)
 
@@ -16,7 +17,7 @@ An AI-powered PDF Q&A assistant. Upload a PDF, ask questions, and get answers gr
 |---|---|
 | Backend | Python, FastAPI |
 | Frontend | HTML, CSS, JavaScript (vanilla) |
-| LLM | Groq API (OpenAI-compatible) |
+| LLM | Groq primary, Gemini fallback (OpenAI-compatible APIs) |
 | Embeddings | fastembed (BAAI/bge-small-en-v1.5) |
 | Vector store | ChromaDB |
 | Chat history | SQLite |
@@ -29,7 +30,8 @@ An AI-powered PDF Q&A assistant. Upload a PDF, ask questions, and get answers gr
 3. **Embed** — each chunk is converted into a vector embedding via `fastembed` and stored in ChromaDB
 4. **Ask** — a user question is embedded the same way, and ChromaDB returns the most similar chunks
 5. **Filter** — a relevance-distance threshold rejects weak matches, so unrelated questions don't pull in irrelevant context
-6. **Answer** — the retrieved chunks (if any) are passed to the LLM (Groq) as grounding context; the model is instructed to answer only from that context
+6. **Answer** — the retrieved chunks from the active PDF (if any) are passed to the configured LLM as grounding context
+7. **Practice** — generate quizzes or flashcards from the active PDF's indexed chunks
 
 ## Project Structure
 
@@ -41,9 +43,12 @@ StudyMate/
 │   ├── rag.py
 │   └── database.py
 ├── templates/
-│   └── index.html
+│   ├── index.html
+│   ├── login.html
+│   ├── chat.html
+│   ├── chat.js
+│   └── style.css
 ├── static/
-│   ├── style.css
 │   └── script.js
 ├── requirements.txt
 └── .gitignore
@@ -52,7 +57,7 @@ StudyMate/
 ## Prerequisites
 
 - Python 3.9+
-- A [Groq API key](https://console.groq.com)
+- A [Gemini API key](https://aistudio.google.com/apikey)
 
 ## Setup
 
@@ -74,9 +79,10 @@ StudyMate/
    pip install -r requirements.txt
    ```
 
-4. **Add your Groq API key** — create a `.env` file in the project root:
+4. **Add provider API keys** — copy `.env.example` to `.env` and add at least one valid key. Groq is tried first; Gemini is used if Groq fails:
    ```
-   GROQ_API_KEY=your_api_key_here
+   GEMINI_API_KEY=your_api_key_here
+   GROQ_API_KEY=your_groq_api_key_here
    ```
 
 5. **Run the app**
@@ -93,20 +99,22 @@ StudyMate/
 
 | Variable | Description |
 |---|---|
-| `GROQ_API_KEY` | API key used to authenticate requests to the Groq LLM |
+| `GEMINI_API_KEY` | Optional Gemini key; used as fallback |
+| `GROQ_API_KEY` | Optional Groq key; tried first |
+| `GEMINI_MODEL` | Optional Gemini model override |
+| `GROQ_MODEL` | Optional Groq model override |
 
 ## Usage
 
 1. Open the app in your browser
 2. Upload a PDF file
 3. Wait for it to be processed (extracted, chunked, and embedded)
-4. Ask questions about the document in the chat box
-5. Your conversation is saved automatically for the session
+4. Ask questions about the document, or choose **Create flashcards** to build a deck
+5. Reveal each flashcard answer and move through the deck
+6. Your conversation is saved automatically for the session
 
 ## Contributing
 
 Contributions are welcome. Please open an issue to discuss what you'd like to change, then submit a pull request.
 
 ## License
-
-Add your license here (e.g. MIT).

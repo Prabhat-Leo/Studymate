@@ -69,3 +69,9 @@ def clear_messages():
     conn.execute("DELETE FROM messages")
     conn.commit()
     conn.close()
+
+def clear_documents():
+    conn = get_db_connection()
+    conn.execute("DELETE FROM documents")
+    conn.commit()
+    conn.close()
